@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>EAUNI</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="browsermode" content="application" />
+  <!--强制坚屏显示(部分移动端浏览器的专有属性)-->
+  <meta name="full-screen" content="yes" />
+  <!--全屏显示网页(部分移动端浏览器的专有属性)-->
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <!--禁止百度转码-->
+
+  <link rel="stylesheet" href="static/font/iconfont.css">
+  <link rel="stylesheet" href="static/css/animate.css">
+</head>
+
+
+<body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+
+  <script>
+	var apiserver = "";
+    var CHECKURL = "http://" + apiserver + "/update.txt";
+    // 更新应用资源
+			function installWgt(path) {
+				plus.nativeUI.showWaiting("更新APP中...");
+				plus.runtime.install(path, {}, function() {
+					plus.nativeUI.closeWaiting();
+					// console.log("安装wgt文件成功！");
+					plus.nativeUI.alert("应用资源更新完成！", function() {
+						plus.runtime.restart();
+					});
+				}, function(e) {
+					plus.nativeUI.closeWaiting();
+					// console.log("更新失败[" + e.code + "]：" + e.message);
+					plus.nativeUI.alert("更新失败[" + e.code + "]：" + e.message);
+				});
+			}
+
+			function downWgt(wgtUrl, newVer) {
+				if(confirm('发现新升级包' + newVer + '，点击确认后将进行更新')) {
+					plus.nativeUI.showWaiting("下载升级包...");
+					plus.downloader.createDownload(wgtUrl, {
+						filename: "_doc/update/"
+					}, function(d, status) {
+						if(status == 200) {
+							// alert("下载wgt成功：" + d.filename);
+							installWgt(d.filename); // 安装wgt包
+						} else {
+							plus.nativeUI.alert("下载升级包失败！");
+						}
+						plus.nativeUI.closeWaiting();
+					}).start();
+				}
+			}
+
+			function getMobile() {
+				if(/android/i.test(navigator.userAgent)) {
+					return 'android';
+				}
+				if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+					return 'ios';
+				}
+			}
+
+			function openDownPage(url) {
+				if(confirm('发现新版本，点击确认后，请在新窗口下载指定版本的APP')) {
+					plus.runtime.openURL(url);
+				}
+			}
+
+			function checkUpdate() {
+				try {
+					var xhr = new plus.net.XMLHttpRequest();
+				} catch(e) {
+					var xhr = new XMLHttpRequest();
+				}
+				//var xhr = new plus.net.XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					switch(xhr.readyState) {
+						//						xhr.readyState的值如下:
+						//						0: 请求未初始化
+						//						1: 服务器连接已建立
+						//						2: 请求已接收
+						//						3: 请求处理中
+						//						4: 请求已完成， 且响应已就绪
+						case 4:
+							// plus.nativeUI.closeWaiting();
+							if(xhr.status == 200) {
+								//alert("检测更新成功：" + xhr.responseText);
+								var datas = JSON.parse(xhr.responseText);
+								var newVer = datas.newVer;
+								var type = datas.type;
+								var dataUrl = datas.dataUrl;
+								var pageUrl = datas.pageUrl;
+								if(wgtVer && newVer && (wgtVer != newVer)) {
+
+									if(type == 'wgt') {
+										if(dataUrl) downWgt(dataUrl, newVer); // 直接下载升级包
+									} else {
+										if(getMobile() == 'android') {
+											if(dataUrl) downWgt(dataUrl, newVer); // 直接下载升级包
+										}
+										if(getMobile() == 'ios') {
+											if(pageUrl) openDownPage(pageUrl) // 打开浏览器下载升级包
+										}
+									}
+
+								} else {
+									//plus.nativeUI.alert("无新版本可更新！");
+								}
+							} else {
+								//alert("检测更新失败！");
+								//plus.nativeUI.alert("检测更新失败！");
+							}
+							break;
+						default:
+							break;
+					}
+				}
+				xhr.open('GET', CHECKURL);
+				xhr.send();
+			}
+
+			function plusReady() {
+				var first = 0
+				//处理安卓回退键跳出APP
+				plus.key.addEventListener('backbutton', function () {
+					if (confirm('确认退出？')) {
+					plus.runtime.quit();
+					}
+				}, false);
+				//alert(plus.runtime.appid)
+				// 获取本地应用资源版本号
+				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+					wgtVer = inf.version;
+					// alert("当前应用版本：" + wgtVer);
+				});
+				//检查更新
+				checkUpdate();
+			}
+			// if(window.plus) {
+			// 	plusReady();
+			// } else {
+			// 	document.addEventListener('plusready', plusReady, false);
+			// }
+  </script>
+</body>
+
+</html>

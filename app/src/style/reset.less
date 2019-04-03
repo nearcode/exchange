@@ -1,0 +1,103 @@
+/*
+*   清除所有元素默认的内外边距
+*/
+* { 
+    margin: 0; 
+    padding: 0; 
+}
+/*
+*   所有元素默认使用标准盒模型
+*/
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	word-break: break-all;
+}
+body {
+	width: 100%;
+	max-width: 750px;
+    min-height: 100vh;
+    margin: 0 auto;
+    font-family: "PingFang SC","Lantinghei SC","Microsoft YaHei",arial,"\5b8b\4f53",sans-serif,tahoma;
+	font-size: 0.26rem;
+	color:#333;
+	word-wrap: break-word;
+	background-color: #fff;
+}
+/*
+*   h标签默认不加粗
+*/
+h1, h2, h3, h4, h5, h6{
+	font-weight: normal;
+}
+main,
+header,
+nav,
+footer,
+article,
+aside,
+section {
+	display: block;
+}
+a { 
+	text-decoration:none;
+	color:#333; 
+	-webkit-tap-highlight-color:transparent;
+}
+a:hover, a:active, a:focus {
+	text-decoration:none;
+}
+img {
+	border: 0;
+	max-width: 100%;
+	vertical-align: middle;
+}
+ul, ol, li {
+	list-style-type:none;
+}
+em, i {
+	font-style: normal;
+}
+/*
+ *	去除按钮的默认样式
+ * */
+input[type="submit"],
+input[type="button"],
+button[type="submit"],
+button[type="button"],
+input[type="reset"],
+input[type="number"],
+button[type="reset"]{
+	-moz-appearance: none;
+    -o-appearance: none;
+    -webkit-appearance: none;
+	appearance: none;
+	outline: none; 
+	border: 0;
+}
+/*
+ *	去除文本框获取焦点时的高亮框
+ * */
+input[type="text"]:focus, 
+button[type="text"]:focus { 
+	outline:none;
+}
+input[type="text"], 
+button[type="text"], 
+textarea {
+	-moz-appearance: none;
+    -o-appearance: none;
+    -webkit-appearance: none;
+	appearance: none;
+	border:0;
+}
+button, input { 
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+table {
+    border-collapse:collapse;
+}
+

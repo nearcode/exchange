@@ -1,0 +1,76 @@
+/*
+*   mixin.less
+*   定义公共变量、函数等
+*/
+
+/* 主题色  通用主题颜色*/
+@main-cor: #3b82de;
+/* 页面背景色 */
+@pub-bg: #f7f7f7;
+
+// 边框颜色
+@bord-col:#eaeef7;
+
+/* 圆角 */
+.border-radius(@size) {
+    -moz-border-radius: @size;
+    -webkit-border-radius: @size;
+    border-radius: @size;
+}
+
+/* 背景图大小 */
+.bg-size(@X, @Y) {
+    background-size: @X @Y;
+}
+
+/* 从左到右的背景色线性渐变 */
+.bg-cor-ltr(@start, @end) {
+    background: -webkit-linear-gradient(left, @start , @end); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, @start, @end); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, @start, @end); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, @start , @end); /* 标准的语法 */
+}
+
+/* X轴偏移 */
+.transX(@num) {
+    -moz-transform: translateX(@num);
+    -webkit-transform: translateX(@num);
+    transform: translateX(@num);
+}
+
+/* Y轴偏移 */
+.transY(@num) {
+    -moz-transform: translateY(@num);
+    -webkit-transform: translateY(@num);
+    transform: translateY(@num);
+}
+
+/* 周期 */
+.transition(@attr, @type, @time) {
+    -moz-transition: @attr @type @time;
+    -ms-transition: @attr @type @time;
+    transition: @attr @type @time;
+}
+/* 动画 */
+.animation(@name, @duration, @delay) {
+    -moz-animation: @name @duration @delay;
+    -webkit-animation: @name @duration @delay;
+    animation: @name @duration @delay;
+}
+
+/* 固定在底部 */
+.fixedBottom(@height: 1rem, @index: 9) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 1000px;
+    height: @height;
+    z-index: @index;
+}
+/* 底部1.1rem高度占位符 */
+.seat-bottom {
+    height: 1.1rem;
+}
+.box-s {
+    box-shadow: 0px 1px 8px 1px #d0cdcd;
+}
