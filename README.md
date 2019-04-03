@@ -1,7 +1,9 @@
 # exchange
 免费创建数字币交易所
 
-[所需软件打包下载](http://pan.baidu.com)
+[所需软件打包下载]
+
+链接: https://pan.baidu.com/s/1mlP_lXmkEMuNkuYkoq7dew 提取码: xufq
 
 1.安装erlang
 
@@ -25,6 +27,10 @@
 5.运行打包文件目录下的start文件，会自动启动mongodb、redis、rabbitmq
 
 6.网站程序说明
+
+[网站程序下载]
+
+链接: https://pan.baidu.com/s/10ohayhcyz1Efq2zXDCk8Fg 提取码: x5rf
     
     web.exe启动一个web环境，相当于nginx,可通过访问http://127.0.0.1访问网站
     base.exe为网站api
