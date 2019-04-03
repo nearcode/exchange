@@ -3,7 +3,7 @@
 
 [所需软件打包下载]
 
-链接: https://pan.baidu.com/s/1mlP_lXmkEMuNkuYkoq7dew 提取码: xufq
+https://share.weiyun.com/5IUjCcJ
 
 1.安装erlang
 
@@ -30,7 +30,7 @@
 
 [网站程序下载]
 
-链接: https://pan.baidu.com/s/1IRxi9F58OX5CmDoQrZwlMw 提取码: vp9s
+https://share.weiyun.com/5EPeGxY
     
     web.exe启动一个web环境，相当于nginx,可通过访问http://127.0.0.1访问网站
     base.exe为网站api
