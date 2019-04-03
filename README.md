@@ -1,6 +1,10 @@
 # exchange
 免费创建数字币交易所
 
+架构golang、mongodb、redis、rabbmitmq
+
+采用内存撮合，微服务架构，支持高并发，多集群
+
 [所需软件打包下载]
 
 https://share.weiyun.com/5IUjCcJ
