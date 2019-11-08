@@ -1,5 +1,13 @@
-下载地址
+官方网站
 http://chainsofts.com/
+
+后端下载地址
+
+https://datares.oss-cn-shanghai.aliyuncs.com/code/%E5%90%8E%E7%AB%AF.zip
+
+前端下载地址
+
+https://datares.oss-cn-shanghai.aliyuncs.com/code/%E5%89%8D%E7%AB%AF.zip
 
 
 
